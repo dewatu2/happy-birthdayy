@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ucapan Spesial</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #ffe4ec;
+      font-family: 'Segoe UI', cursive;
+      text-align: center;
+      color: #000;
+    }
+
+    .love {
+      position: absolute;
+      bottom: -50px;
+      font-size: 30px;
+      color: rgba(255, 50, 100, 0.5);
+      animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    .heartbeat {
+      font-size: 60px;
+      animation: beat 1s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.3);
+      }
+    }
+
+    .text {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    .card {
+      width: 60%;
+      background-color: white;
+      overflow: hidden;
+      padding: 0 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-height: 0;
+      opacity: 0;
+      animation: unfoldCard 4s ease-out forwards;
+    }
+
+    @keyframes unfoldCard {
+      0% {
+        max-height: 0;
+        opacity: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      100% {
+        max-height: 1000px;
+        opacity: 1;
+        padding-top: 2em;
+        padding-bottom: 2em;
+      }
+    }
+
+    .card h1 {
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
+
+    .card p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #333;
+      text-align: left;
+    }
+
+    .footer {
+      margin-top: 2em;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .heart {
+      font-size: 2em;
+      text-align: center;
+      margin-top: 1em;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio background -->
+  <audio id="backgroundMusic" loop>
+    <source src="WhatsApp Audio 2025-05-01 at 11.55.34.mpeg" type="audio/mp3">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <!-- Slide 1 -->
+  <div class="slide active" id="slide1">
+    <div class="text">Happy Birthday Anaaa Cantikkk🥳🥳</div>
+    <div class="heartbeat" id="loveBtn">❤️</div>
+    <div class="text">Love-nya diklik ya!</div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide" id="slide2">
+    <div class="card">
+      <h1>Dear Sayangkuu</h1>
+      <p>
+        Selamat ulang tahun Sayanggg! Semoga hari ini penuh kebahagiaan dan semua yang terbaik buat kamu,dan semoga cita cita yang kamu impikan bisa tercapai.Meskipun kita baru aja mulai pacaran, aku senang banget bisa ada di sini bareng kamu. Semoga kedepannya kita bisa makin dekat dan saling dukung dalam setiap langkah.
+      </p>
+      <p>
+        Nikmatin banget hari spesial kamu ya! Semoga tahun ini membawa banyak kebaikan dan pengalaman seru buat kamu. Aku berharap yang terbaik untukmu, dan semoga kita bisa terus jadi bagian dari cerita hidup satu sama lain."
+      </p>
+      <p class="footer">With Love,<br /></p>
+      <div class="heart">♥</div>
+    </div>
+  </div>
+
+  <script>
+    function createLove() {
+      const love = document.createElement('div');
+      love.classList.add('love');
+      love.innerHTML = '♥';
+
+      love.style.left = Math.random() * window.innerWidth + 'px';
+      love.style.fontSize = (20 + Math.random() * 30) + 'px';
+      love.style.animationDuration = (3 + Math.random() * 2) + 's';
+
+      document.body.appendChild(love);
+
+      love.addEventListener('animationend', () => {
+        love.remove();
+      });
+    }
+
+    setInterval(createLove, 300);
+
+    document.getElementById('loveBtn').addEventListener('click', () => {
+      document.getElementById('slide1').classList.remove('active');
+      document.getElementById('slide2').classList.add('active');
+
+      const music = document.getElementById('backgroundMusic');
+      if (music.paused) {
+        music.play().catch(err => {
+          console.log('Autoplay gagal, perlu interaksi user:', err);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
